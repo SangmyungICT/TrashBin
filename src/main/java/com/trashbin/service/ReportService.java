@@ -1,9 +1,12 @@
 package com.trashbin.service;
 
 import com.trashbin.domain.ReportEntity;
+import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.dto.ReportDto;
 import com.trashbin.mapper.ReportMapper;
+import com.trashbin.mapper.TrashBinMapper;
 import com.trashbin.repository.ReportRepository;
+import com.trashbin.repository.TrashBinRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,12 +18,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReportService {
 
     private final ReportRepository reportRepository;
+    private final TrashBinRepository trashBinRepository;
     private final ReportMapper reportMapper;
+    private final TrashBinMapper trashBinMapper;
 
     @Transactional
-    public ReportEntity createReport(ReportDto.PostDto postDto){
+    public ReportEntity createReportAndSaveTrashBin(ReportDto.PostDto postDto){
         ReportEntity reportEntity = reportMapper.reportRequestPostDtoToReportEntity(postDto);
         reportRepository.save(reportEntity);
+        TrashBinEntity trashBinEntity = trashBinMapper.reportEntityToTrashBinEntity(reportEntity);
+        trashBinRepository.save(trashBinEntity);
         log.info("Entity Id: {} is saved",reportEntity.getId());
         return reportRepository.findById(reportEntity.getId()).orElseThrow();
     }

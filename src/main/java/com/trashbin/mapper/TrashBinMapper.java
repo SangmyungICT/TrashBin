@@ -1,6 +1,7 @@
 package com.trashbin.mapper;
 
 import com.trashbin.domain.Address;
+import com.trashbin.domain.ReportEntity;
 import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.domain.TrashCategory;
 import com.trashbin.dto.TrashBinDto;
@@ -58,6 +59,17 @@ public interface TrashBinMapper {
                     .trashBinId(trashBinEntity.getId())
                     .trashCategory(trashBinEntity.getTrashCategory())
                     .address(trashBinEntity.getAddress())
+                    .build();
+        }
+    }
+
+    default TrashBinEntity reportEntityToTrashBinEntity(ReportEntity reportEntity){
+        if (reportEntity == null) {
+            return null;
+        } else {
+            return TrashBinEntity.builder()
+                    .address(reportEntity.getAddress())
+                    .trashCategory(reportEntity.getTrashCategory())
                     .build();
         }
     }
