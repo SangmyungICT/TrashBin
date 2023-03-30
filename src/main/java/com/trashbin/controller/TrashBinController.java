@@ -17,10 +17,15 @@ public class TrashBinController {
         return ResponseEntity.ok().body(trashBinService.createTrashBin(postDto));
     }
 
-//    @GetMapping("/get")
-//    public ResponseEntity<?> getTrashBin(@RequestParam Long trashBinId){
+//    @GetMapping("/getbins")
+//    public ResponseEntity<?> getTrashBins(@RequestParam Long trashBinId){
 //        return ResponseEntity.ok().body(trashBinService.);
 //    }
+
+    @GetMapping("/getbin")
+    public ResponseEntity<?> getTrashBin(@RequestParam Long trashBinId){
+        return ResponseEntity.ok().body(trashBinService.getTrashBin(trashBinId));
+    }
 
     @PatchMapping("/modify")
     public ResponseEntity<?> modifyTrashBin(@RequestBody TrashBinDto.PatchDto patchDto){

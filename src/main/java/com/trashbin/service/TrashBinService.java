@@ -29,10 +29,15 @@ public class TrashBinService {
      *
      * @return
      */
-//    public void getTrashBin(Long trashBinId){
-//        trashBinMapper.TrashBinEntitiesToTrashBinResponseDto(trashBinRepository.findById(trashBinId).orElseThrow());
-//        TrashBinEntity trashBinEntity = trashBinRepository.findById(trashBinId).orElseThrow();
-//    }
+    public void getTrashBins(Long trashBinId){
+
+    }
+
+    public TrashBinDto.ResponseDto getTrashBin(Long trashBinId){
+        return trashBinMapper.TrashBinEntityToTrashBinResponseDto(trashBinRepository.findById(trashBinId).orElseThrow());
+    }
+
+
 
     @Transactional
     public TrashBinDto.ResponseDto updateTrashBin(TrashBinDto.PatchDto patchDto){
