@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -18,9 +20,9 @@ public class TrashBinService {
     private final TrashBinMapper trashBinMapper;
 
     @Transactional
-    public TrashBinDto.ResponseDto createTrashBin(TrashBinDto.PostDto postDto){
+    public TrashBinDto.ResponseDto createTrashBin(TrashBinDto.PostDto postDto) {
         TrashBinEntity trashBinEntity = trashBinMapper.trashBinRequestPostDtoToTrashBinEntity(postDto);
-        log.info("Entity Id: {} is saved",trashBinEntity.getId());
+        log.info("Entity Id: {} is saved", trashBinEntity.getId());
         return trashBinMapper.TrashBinEntityToTrashBinResponseDto(trashBinRepository.save(trashBinEntity));
     }
 
@@ -29,28 +31,29 @@ public class TrashBinService {
      *
      * @return
      */
-    public void getTrashBins(Long trashBinId){
+    public TrashBinDto.ResponseDtos<TrashBinDto.TempTrashBinDto> getTrashBins() {
+        List<TrashBinEntity> all = trashBinRepository.findAll();
+        return trashBinMapper.TrashBinEntitiesToTrashBinResponseDtos(all);
 
     }
 
-    public TrashBinDto.ResponseDto getTrashBin(Long trashBinId){
+    public TrashBinDto.ResponseDto getTrashBin(Long trashBinId) {
         return trashBinMapper.TrashBinEntityToTrashBinResponseDto(trashBinRepository.findById(trashBinId).orElseThrow());
     }
 
 
-
     @Transactional
-    public TrashBinDto.ResponseDto updateTrashBin(TrashBinDto.PatchDto patchDto){
+    public TrashBinDto.ResponseDto updateTrashBin(TrashBinDto.PatchDto patchDto) {
         TrashBinEntity trashBinEntity = trashBinRepository.findById(patchDto.getTrashBinId()).orElseThrow();
         trashBinEntity.patchEntity(patchDto);
-        log.info("Entity Id: {} is patched",trashBinEntity.getId());
+        log.info("Entity Id: {} is patched", trashBinEntity.getId());
         return trashBinMapper.TrashBinEntityToTrashBinResponseDto
                 (trashBinRepository.findById(patchDto.getTrashBinId()).orElseThrow());
     }
 
     @Transactional
-    public void deleteTrashBin(TrashBinDto.DeleteDto deleteDto){
+    public void deleteTrashBin(TrashBinDto.DeleteDto deleteDto) {
         trashBinRepository.deleteById(deleteDto.getTrashBinId());
-        log.info("Entity Id: {} is deleted",deleteDto.getTrashBinId());
+        log.info("Entity Id: {} is deleted", deleteDto.getTrashBinId());
     }
 }

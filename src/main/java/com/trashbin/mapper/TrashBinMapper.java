@@ -68,8 +68,8 @@ public interface TrashBinMapper {
             return null;
         } else {
             return TrashBinEntity.builder()
-                    .address(reportEntity.getAddress())
-                    .trashCategory(reportEntity.getTrashCategory())
+                    .address(reportEntity.getTrashBinEntity().getAddress())
+                    .trashCategory(reportEntity.getTrashBinEntity().getTrashCategory())
                     .build();
         }
     }

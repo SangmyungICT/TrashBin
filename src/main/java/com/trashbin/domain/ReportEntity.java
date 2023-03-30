@@ -19,17 +19,22 @@ public class ReportEntity {
     @Column(name = "report_id")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private TrashCategory trashCategory;
+//    @Enumerated(EnumType.STRING)
+//    private TrashCategory trashCategory;
+
+    //    @Embedded
+//    private Address address;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trashbin_id",unique = true)
+    private TrashBinEntity trashBinEntity;
 
     private int nullCount; //3회가 넘어가면 허위신고로 간주
     private LocalDateTime reportTime;
-    @Embedded
-    private Address address;
+
 
     public void patchEntity(ReportDto.PatchDto patchDto){
-        this.trashCategory = patchDto.getTrashCategory();
-        this.address = patchDto.getAddress();
+        this.trashBinEntity = patchDto.getTrashBinEntity();
         this.nullCount = patchDto.getNullCount();
     }
 }

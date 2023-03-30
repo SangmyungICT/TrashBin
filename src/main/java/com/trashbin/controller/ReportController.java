@@ -14,6 +14,7 @@ public class ReportController {
     private final ReportService reportService;
     @PostMapping("/create")
     public ResponseEntity<?> createReport(@RequestBody ReportDto.PostDto postDto){
+        System.out.println("tt11"+postDto.toString());
         return ResponseEntity.ok().body(reportService.createReportAndSaveTrashBin(postDto));
     }
 

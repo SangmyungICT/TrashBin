@@ -1,6 +1,7 @@
 package com.trashbin.dto;
 
 import com.trashbin.domain.Address;
+import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.domain.TrashCategory;
 import lombok.*;
 
@@ -11,6 +12,7 @@ public class ReportDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    @ToString
     public static class PostDto {
         private String trashCategory;
         private String gu; //자치구명
@@ -29,8 +31,7 @@ public class ReportDto {
     @Builder
     public static class ResponseDto {
         private Long reportId;
-        private TrashCategory trashCategory;
-        private Address address;
+        private TrashBinEntity trashBinEntity;
         private int nullCount;
     }
 
@@ -51,8 +52,7 @@ public class ReportDto {
     @Builder
     public static class PatchDto {
         private Long reportId;
-        private TrashCategory trashCategory;
-        private Address address;
+        private TrashBinEntity trashBinEntity;
         private int nullCount;
     }
 }

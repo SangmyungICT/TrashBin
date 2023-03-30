@@ -1,5 +1,6 @@
 package com.trashbin.domain;
 
+import com.trashbin.dto.ReportDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,16 @@ public class Address {
     private double coordinateX; //X좌표
     @Column(nullable = true,name = "COORDINATE_Y")
     private double coordinateY; //Y좌표
+
+    //==생성 메서드==//
+    public static Address createAddress(ReportDto.PostDto postDto){
+        return Address.builder()
+                .gu(postDto.getGu())
+                .roadName(postDto.getRoadName())
+                .detailAddress(postDto.getDetailAddress())
+                .installPoint(postDto.getInstallPoint())
+                .coordinateX(postDto.getCoordinateX())
+                .coordinateY(postDto.getCoordinateY())
+                .build();
+    }
 }

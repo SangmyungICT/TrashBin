@@ -2,6 +2,7 @@ package com.trashbin.mapper;
 
 import com.trashbin.domain.Address;
 import com.trashbin.domain.ReportEntity;
+import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.domain.TrashCategory;
 import com.trashbin.dto.ReportDto;
 import org.mapstruct.Mapper;
@@ -26,10 +27,14 @@ public interface ReportMapper {
                     .coordinateY(postDto.getCoordinateY())
                     .build();
 
-            return ReportEntity.builder()
+            TrashBinEntity trashBinEntity = TrashBinEntity.builder()
                     .trashCategory(trashCategory)
-                    .nullCount(postDto.getNullCount())
                     .address(address)
+                    .build();
+
+            return ReportEntity.builder()
+                    .trashBinEntity(trashBinEntity)
+                    .nullCount(postDto.getNullCount())
                     .build();
         }
     }
@@ -40,8 +45,7 @@ public interface ReportMapper {
         } else {
             return ReportDto.ResponseDto.builder()
                     .reportId(reportEntity.getId())
-                    .trashCategory(reportEntity.getTrashCategory())
-                    .address(reportEntity.getAddress())
+                    .trashBinEntity(reportEntity.getTrashBinEntity())
                     .nullCount(reportEntity.getNullCount())
                     .build();
         }
