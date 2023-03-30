@@ -24,25 +24,6 @@ public class TrashBinDto {
         private double coordinateY; //Y좌표
     }
 
-    public static class TempTrashBinDto{
-        private Long id;
-        private TrashCategory trashCategory;
-        private Address address;
-
-        public TempTrashBinDto(TrashBinEntity trashBinEntity) {
-            this.id = trashBinEntity.getId();
-            this.trashCategory = trashBinEntity.getTrashCategory();
-            this.address = trashBinEntity.getAddress();
-        }
-    }
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Builder
-    public static class ResponseDtos<T> {
-        private List<T> trashBins;
-    }
     @Getter
     @Setter
     @AllArgsConstructor
@@ -52,6 +33,12 @@ public class TrashBinDto {
         private Long trashBinId;
         private TrashCategory trashCategory;
         private Address address;
+
+        public ResponseDto(TrashBinEntity trashBinEntity) {
+            this.trashBinId = trashBinEntity.getId();
+            this.trashCategory = trashBinEntity.getTrashCategory();
+            this.address = trashBinEntity.getAddress();
+        }
     }
 
     @Getter

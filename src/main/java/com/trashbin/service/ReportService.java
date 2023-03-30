@@ -23,14 +23,15 @@ public class ReportService {
     private final TrashBinMapper trashBinMapper;
 
     @Transactional
-    public ReportEntity createReportAndSaveTrashBin(ReportDto.PostDto postDto){
-        System.out.println("여기는 createReportAndSaveTrashBin");
-        ReportEntity reportEntity = reportMapper.reportRequestPostDtoToReportEntity(postDto);
+    public ReportDto.ResponseDto createReportAndSaveTrashBin(ReportDto.PostDto postDto){
+
+        TrashBinEntity trashBinEntity = trashBinRepository.save(TrashBinEntity.createTrashBinEntity(postDto));
+
+        ReportEntity reportEntity = reportMapper.reportRequestPostDtoToReportEntity(postDto,trashBinEntity);
         reportRepository.save(reportEntity);
-        TrashBinEntity trashBinEntity = trashBinMapper.reportEntityToTrashBinEntity(reportEntity);
-        trashBinRepository.save(trashBinEntity);
+
         log.info("Entity Id: {} is saved",reportEntity.getId());
-        return reportRepository.findById(reportEntity.getId()).orElseThrow();
+        return reportMapper.reportEntityToReportResponseDto(reportRepository.findById(reportEntity.getId()).orElseThrow());
     }
 
     public ReportDto.ResponseDto getReport(Long reportId){

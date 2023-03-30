@@ -1,11 +1,16 @@
 package com.trashbin.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.dto.TrashBinDto;
 import com.trashbin.service.TrashBinService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,9 +22,12 @@ public class TrashBinController {
         return ResponseEntity.ok().body(trashBinService.createTrashBin(postDto));
     }
 
+
     @GetMapping("/getbins")
-    public ResponseEntity<?> getTrashBins(@RequestParam Long trashBinId){
-        return ResponseEntity.ok().body(trashBinService.getTrashBins());
+    public ResponseEntity<?> getTrashBins() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        List<TrashBinEntity> trashBins = trashBinService.getTrashBins();
+        return ResponseEntity.ok().body(trashBins);
     }
 
     @GetMapping("/getbin")

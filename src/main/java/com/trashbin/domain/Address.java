@@ -1,9 +1,7 @@
 package com.trashbin.domain;
 
 import com.trashbin.dto.ReportDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,6 +10,8 @@ import javax.persistence.Embeddable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@ToString
 public class Address {
     private String gu; //자치구명
     private String roadName; //도로명

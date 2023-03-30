@@ -1,5 +1,6 @@
 package com.trashbin.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trashbin.dto.ReportDto;
 import com.trashbin.service.ReportService;
 import lombok.RequiredArgsConstructor;
@@ -12,25 +13,26 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("report")
 public class ReportController {
     private final ReportService reportService;
+
     @PostMapping("/create")
-    public ResponseEntity<?> createReport(@RequestBody ReportDto.PostDto postDto){
-        System.out.println("tt11"+postDto.toString());
-        return ResponseEntity.ok().body(reportService.createReportAndSaveTrashBin(postDto));
+    public ResponseEntity<?> createReport(@RequestBody ReportDto.PostDto postDto) {
+        return ResponseEntity.ok().body(reportService.createReportAndSaveTrashBin(postDto).getTrashBinEntity());
     }
 
+
     @GetMapping("/get")
-    public ResponseEntity<?> getReport(@RequestParam Long reportId){
+    public ResponseEntity<?> getReport(@RequestParam Long reportId) {
         return ResponseEntity.ok().body(reportService.getReport(reportId));
     }
 
     @PatchMapping("/modify")
-    public ResponseEntity<?> modifyReport(@RequestBody ReportDto.PatchDto patchDto){
+    public ResponseEntity<?> modifyReport(@RequestBody ReportDto.PatchDto patchDto) {
         return ResponseEntity.ok().body(reportService.updateReport(patchDto));
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteReport(@RequestParam Long reportId){
+    public ResponseEntity<?> deleteReport(@RequestParam Long reportId) {
         reportService.deleteReport(new ReportDto.DeleteDto(reportId));
-        return ResponseEntity.ok().body("deleted reportId:"+reportId);
+        return ResponseEntity.ok().body("deleted reportId:" + reportId);
     }
 }

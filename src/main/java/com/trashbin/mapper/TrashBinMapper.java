@@ -40,14 +40,13 @@ public interface TrashBinMapper {
         }
     }
 
-    default TrashBinDto.ResponseDtos<TrashBinDto.TempTrashBinDto>
-    TrashBinEntitiesToTrashBinResponseDtos(List<TrashBinEntity> trashBinEntities) {
+    default List<TrashBinDto.ResponseDto>
+    TrashBinEntitiesToTrashBinResponseDtos(List<TrashBinEntity> trashBinEntities)  {
         if (trashBinEntities.isEmpty()) {
             return null;
         } else {
-            List<TrashBinDto.TempTrashBinDto> dtos = trashBinEntities.stream()
-                    .map(TrashBinDto.TempTrashBinDto::new).collect(Collectors.toList());
-            return TrashBinDto.ResponseDtos.<TrashBinDto.TempTrashBinDto>builder().trashBins(dtos).build();
+            return trashBinEntities.stream()
+                    .map(TrashBinDto.ResponseDto::new).collect(Collectors.toList());
         }
     }
 
@@ -59,17 +58,6 @@ public interface TrashBinMapper {
                     .trashBinId(trashBinEntity.getId())
                     .trashCategory(trashBinEntity.getTrashCategory())
                     .address(trashBinEntity.getAddress())
-                    .build();
-        }
-    }
-
-    default TrashBinEntity reportEntityToTrashBinEntity(ReportEntity reportEntity){
-        if (reportEntity == null) {
-            return null;
-        } else {
-            return TrashBinEntity.builder()
-                    .address(reportEntity.getTrashBinEntity().getAddress())
-                    .trashCategory(reportEntity.getTrashBinEntity().getTrashCategory())
                     .build();
         }
     }

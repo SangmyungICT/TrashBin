@@ -1,5 +1,6 @@
 package com.trashbin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trashbin.dto.ReportDto;
 import lombok.*;
 
@@ -12,18 +13,13 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ReportEntity {
 
     @Id
     @GeneratedValue
     @Column(name = "report_id")
     private Long id;
-
-//    @Enumerated(EnumType.STRING)
-//    private TrashCategory trashCategory;
-
-    //    @Embedded
-//    private Address address;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trashbin_id",unique = true)

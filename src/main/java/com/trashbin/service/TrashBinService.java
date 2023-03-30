@@ -1,5 +1,6 @@
 package com.trashbin.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.dto.TrashBinDto;
 import com.trashbin.mapper.TrashBinMapper;
@@ -28,13 +29,10 @@ public class TrashBinService {
 
     /**
      * gps 좌표에 따라 근처 쓰레기통을 리턴하는 로직을 만들어야 할 듯.
-     *
-     * @return
      */
-    public TrashBinDto.ResponseDtos<TrashBinDto.TempTrashBinDto> getTrashBins() {
+    public List<TrashBinEntity> getTrashBins() {
         List<TrashBinEntity> all = trashBinRepository.findAll();
-        return trashBinMapper.TrashBinEntitiesToTrashBinResponseDtos(all);
-
+        return all;
     }
 
     public TrashBinDto.ResponseDto getTrashBin(Long trashBinId) {

@@ -7,30 +7,18 @@ import com.trashbin.domain.TrashCategory;
 import com.trashbin.dto.ReportDto;
 import org.mapstruct.Mapper;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 @Mapper(componentModel = "spring")
+
 public interface ReportMapper {
-    default ReportEntity reportRequestPostDtoToReportEntity(ReportDto.PostDto postDto) {
+
+    default ReportEntity reportRequestPostDtoToReportEntity(ReportDto.PostDto postDto,TrashBinEntity trashBinEntity) {
+
         if (postDto == null) {
             return null;
         } else {
-            TrashCategory trashCategory;
-            if (postDto.getTrashCategory().equals("CIGARETTE")) trashCategory = TrashCategory.CIGARETTE;
-            else if (postDto.getTrashCategory().equals("RECYCLE")) trashCategory = TrashCategory.RECYCLE;
-            else trashCategory = TrashCategory.GENERAL;
-
-            Address address = Address.builder()
-                    .gu(postDto.getGu())
-                    .roadName(postDto.getRoadName())
-                    .detailAddress(postDto.getDetailAddress())
-                    .installPoint(postDto.getInstallPoint())
-                    .coordinateX(postDto.getCoordinateX())
-                    .coordinateY(postDto.getCoordinateY())
-                    .build();
-
-            TrashBinEntity trashBinEntity = TrashBinEntity.builder()
-                    .trashCategory(trashCategory)
-                    .address(address)
-                    .build();
 
             return ReportEntity.builder()
                     .trashBinEntity(trashBinEntity)
