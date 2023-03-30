@@ -1,6 +1,5 @@
 package com.trashbin.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trashbin.dto.ReportDto;
 import com.trashbin.service.ReportService;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +15,8 @@ public class ReportController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createReport(@RequestBody ReportDto.PostDto postDto) {
-        return ResponseEntity.ok().body(reportService.createReportAndSaveTrashBin(postDto).getTrashBinEntity());
+        return ResponseEntity.ok().body(reportService.createReportAndSaveTrashBin(postDto).getTrashBinResponseDto());
     }
-
 
     @GetMapping("/get")
     public ResponseEntity<?> getReport(@RequestParam Long reportId) {

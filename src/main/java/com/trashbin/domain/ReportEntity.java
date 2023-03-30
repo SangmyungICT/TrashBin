@@ -21,16 +21,18 @@ public class ReportEntity {
     @Column(name = "report_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trashbin_id",unique = true)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "trashbin_id")
+    @JsonIgnore
     private TrashBinEntity trashBinEntity;
 
     private int nullCount; //3회가 넘어가면 허위신고로 간주
     private LocalDateTime reportTime;
 
 
-    public void patchEntity(ReportDto.PatchDto patchDto){
-        this.trashBinEntity = patchDto.getTrashBinEntity();
+    public void patchEntity(ReportDto.PatchDto patchDto) {
+        this.trashBinEntity.setTrashCategory(patchDto.getTrashBinPostObjectDto().getTrashCategory());
+        this.trashBinEntity.setAddress(patchDto.getTrashBinPostObjectDto().getAddress());
         this.nullCount = patchDto.getNullCount();
     }
 }

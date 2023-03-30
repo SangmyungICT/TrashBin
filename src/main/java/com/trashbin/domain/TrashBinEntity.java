@@ -28,13 +28,14 @@ public class TrashBinEntity {
         this.address = patchDto.getAddress();
         this.trashCategory = patchDto.getTrashCategory();
     }
+
     public void patchEntity(ReportDto.PatchDto patchDto) {
-        this.address = patchDto.getTrashBinEntity().getAddress();
-        this.trashCategory = patchDto.getTrashBinEntity().getTrashCategory();
+        this.address = patchDto.getTrashBinPostObjectDto().getAddress();
+        this.trashCategory = patchDto.getTrashBinPostObjectDto().getTrashCategory();
     }
 
     //==생성 메서드==//
-    public static TrashBinEntity createTrashBinEntity(ReportDto.PostDto postDto){
+    public static TrashBinEntity createTrashBinEntity(ReportDto.PostDto postDto) {
         TrashCategory trashCategory;
         if (postDto.getTrashCategory().equals("CIGARETTE")) trashCategory = TrashCategory.CIGARETTE;
         else if (postDto.getTrashCategory().equals("RECYCLE")) trashCategory = TrashCategory.RECYCLE;

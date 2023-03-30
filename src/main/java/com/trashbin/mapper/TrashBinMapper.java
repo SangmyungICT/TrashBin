@@ -1,7 +1,6 @@
 package com.trashbin.mapper;
 
 import com.trashbin.domain.Address;
-import com.trashbin.domain.ReportEntity;
 import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.domain.TrashCategory;
 import com.trashbin.dto.TrashBinDto;
@@ -41,7 +40,7 @@ public interface TrashBinMapper {
     }
 
     default List<TrashBinDto.ResponseDto>
-    TrashBinEntitiesToTrashBinResponseDtos(List<TrashBinEntity> trashBinEntities)  {
+    TrashBinEntitiesToTrashBinResponseDtos(List<TrashBinEntity> trashBinEntities) {
         if (trashBinEntities.isEmpty()) {
             return null;
         } else {
@@ -50,7 +49,7 @@ public interface TrashBinMapper {
         }
     }
 
-    default TrashBinDto.ResponseDto TrashBinEntityToTrashBinResponseDto(TrashBinEntity trashBinEntity){
+    default TrashBinDto.ResponseDto TrashBinEntityToTrashBinResponseDto(TrashBinEntity trashBinEntity) {
         if (trashBinEntity == null) {
             return null;
         } else {

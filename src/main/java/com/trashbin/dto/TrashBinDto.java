@@ -5,7 +5,6 @@ import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.domain.TrashCategory;
 import lombok.*;
 
-import java.util.List;
 
 public class TrashBinDto {
 
@@ -22,6 +21,17 @@ public class TrashBinDto {
         private String installPoint; //설치지점
         private double coordinateX; //X좌표
         private double coordinateY; //Y좌표
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class PostObjectDto {
+        private Long trashBinId;
+        private TrashCategory trashCategory;
+        private Address address;
     }
 
     @Getter

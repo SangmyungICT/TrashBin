@@ -1,20 +1,17 @@
 package com.trashbin.mapper;
 
-import com.trashbin.domain.Address;
 import com.trashbin.domain.ReportEntity;
 import com.trashbin.domain.TrashBinEntity;
-import com.trashbin.domain.TrashCategory;
 import com.trashbin.dto.ReportDto;
+import com.trashbin.dto.TrashBinDto;
 import org.mapstruct.Mapper;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 @Mapper(componentModel = "spring")
 
 public interface ReportMapper {
 
-    default ReportEntity reportRequestPostDtoToReportEntity(ReportDto.PostDto postDto,TrashBinEntity trashBinEntity) {
+    default ReportEntity reportRequestPostDtoToReportEntity(ReportDto.PostDto postDto, TrashBinEntity trashBinEntity) {
 
         if (postDto == null) {
             return null;
@@ -27,13 +24,18 @@ public interface ReportMapper {
         }
     }
 
-    default ReportDto.ResponseDto reportEntityToReportResponseDto(ReportEntity reportEntity){
+    default ReportDto.ResponseDto reportEntityToReportResponseDto(ReportEntity reportEntity) {
         if (reportEntity == null) {
             return null;
         } else {
+            TrashBinDto.ResponseDto trashBinResponseDto = TrashBinDto.ResponseDto.builder()
+                    .trashBinId(reportEntity.getTrashBinEntity().getId())
+                    .address(reportEntity.getTrashBinEntity().getAddress())
+                    .trashCategory(reportEntity.getTrashBinEntity().getTrashCategory())
+                    .build();
             return ReportDto.ResponseDto.builder()
                     .reportId(reportEntity.getId())
-                    .trashBinEntity(reportEntity.getTrashBinEntity())
+                    .trashBinResponseDto(trashBinResponseDto)
                     .nullCount(reportEntity.getNullCount())
                     .build();
         }

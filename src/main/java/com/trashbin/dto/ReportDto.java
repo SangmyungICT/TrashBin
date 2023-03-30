@@ -1,10 +1,6 @@
 package com.trashbin.dto;
 
-import com.trashbin.domain.Address;
-import com.trashbin.domain.TrashBinEntity;
-import com.trashbin.domain.TrashCategory;
 import lombok.*;
-
 
 public class ReportDto {
     @Getter
@@ -31,7 +27,7 @@ public class ReportDto {
     @Builder
     public static class ResponseDto {
         private Long reportId;
-        private TrashBinEntity trashBinEntity;
+        private TrashBinDto.ResponseDto trashBinResponseDto;
         private int nullCount;
     }
 
@@ -52,7 +48,7 @@ public class ReportDto {
     @Builder
     public static class PatchDto {
         private Long reportId;
-        private TrashBinEntity trashBinEntity;
+        private TrashBinDto.PostObjectDto trashBinPostObjectDto;
         private int nullCount;
     }
 }

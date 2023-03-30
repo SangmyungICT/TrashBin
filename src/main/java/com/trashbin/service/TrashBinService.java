@@ -1,6 +1,5 @@
 package com.trashbin.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.dto.TrashBinDto;
 import com.trashbin.mapper.TrashBinMapper;
@@ -30,9 +29,8 @@ public class TrashBinService {
     /**
      * gps 좌표에 따라 근처 쓰레기통을 리턴하는 로직을 만들어야 할 듯.
      */
-    public List<TrashBinEntity> getTrashBins() {
-        List<TrashBinEntity> all = trashBinRepository.findAll();
-        return all;
+    public List<TrashBinDto.ResponseDto> getTrashBins() {
+        return trashBinMapper.TrashBinEntitiesToTrashBinResponseDtos(trashBinRepository.findAll());
     }
 
     public TrashBinDto.ResponseDto getTrashBin(Long trashBinId) {
@@ -49,6 +47,9 @@ public class TrashBinService {
                 (trashBinRepository.findById(patchDto.getTrashBinId()).orElseThrow());
     }
 
+    /**
+     * report로 등록된 쓰레기통은 삭제가 안됨.
+     */
     @Transactional
     public void deleteTrashBin(TrashBinDto.DeleteDto deleteDto) {
         trashBinRepository.deleteById(deleteDto.getTrashBinId());
