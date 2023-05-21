@@ -11,15 +11,15 @@ public class ClientDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    @ApiOperation(value = "사용자 GPS정보")
+////    @ApiOperation(value = "사용자 GPS정보")
     public static class GPSDto {
-        @ApiParam(value = "위도")
+//        @ApiParam(value = "위도")
         private double latitude; //위도
-        @ApiParam(value = "경도")
+//        @ApiParam(value = "경도")
         private double longitude; //경도
     }
 
-    @ApiOperation(value = "사용자 GPS 정보 + 쓰레기통 조회할 범위")
+////    @ApiOperation(value = "사용자 GPS 정보 + 쓰레기통 조회할 범위")
     @Getter
     @Setter
     @AllArgsConstructor
