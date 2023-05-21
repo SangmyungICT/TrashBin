@@ -40,7 +40,7 @@ public interface TrashBinMapper {
     }
 
     default List<TrashBinDto.ResponseDto>
-    TrashBinEntitiesToAllTrashBinResponseDtos(List<TrashBinEntity> trashBinEntities) {
+    TrashBinEntitiesToTrashBinResponseDtos(List<TrashBinEntity> trashBinEntities) {
         if (trashBinEntities.isEmpty()) {
             return null;
         } else {
