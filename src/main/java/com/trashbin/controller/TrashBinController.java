@@ -1,5 +1,6 @@
 package com.trashbin.controller;
 
+import com.trashbin.dto.ClientDto;
 import com.trashbin.dto.TrashBinDto;
 import com.trashbin.service.TrashBinService;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +20,15 @@ public class TrashBinController {
         return ResponseEntity.ok().body(trashBinService.createTrashBin(postDto));
     }
 
-    @GetMapping("/getbins")
-    public ResponseEntity<?> getTrashBins() {
-        return ResponseEntity.ok().body(trashBinService.getTrashBins());
+    @GetMapping("/getallbins")
+    public ResponseEntity<?> getAllTrashBins() {
+        return ResponseEntity.ok().body(trashBinService.getAllTrashBin());
+    }
+
+
+    @GetMapping("/getnearbins")
+    public ResponseEntity<?> getNearBins(@ModelAttribute("gpsdistance") ClientDto.GPSDistanceDto gpsDistanceDto) {
+        return ResponseEntity.ok().body(trashBinService.getNearTrashBin(gpsDistanceDto));
     }
 
     @GetMapping("/getbin")

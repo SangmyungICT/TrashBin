@@ -1,6 +1,8 @@
 package com.trashbin.service;
 
+import com.trashbin.config.GetNearPin;
 import com.trashbin.domain.TrashBinEntity;
+import com.trashbin.dto.ClientDto;
 import com.trashbin.dto.TrashBinDto;
 import com.trashbin.mapper.TrashBinMapper;
 import com.trashbin.repository.TrashBinRepository;
@@ -18,6 +20,7 @@ public class TrashBinService {
 
     private final TrashBinRepository trashBinRepository;
     private final TrashBinMapper trashBinMapper;
+    private final GetNearPin getNearPin;
 
     @Transactional
     public TrashBinDto.ResponseDto createTrashBin(TrashBinDto.PostDto postDto) {
@@ -29,8 +32,12 @@ public class TrashBinService {
     /**
      * gps 좌표에 따라 근처 쓰레기통을 리턴하는 로직을 만들어야 할 듯.
      */
-    public List<TrashBinDto.ResponseDto> getTrashBins() {
+    public List<TrashBinDto.ResponseDto> getAllTrashBin() {
         return trashBinMapper.TrashBinEntitiesToTrashBinResponseDtos(trashBinRepository.findAll());
+    }
+
+    public List<TrashBinDto.ResponseDto> getNearTrashBin(ClientDto.GPSDistanceDto gpsDistanceDto) {
+        return trashBinMapper.TrashBinEntitiesToTrashBinResponseDtos(getNearPin.nearTrashBinList(gpsDistanceDto));
     }
 
     public TrashBinDto.ResponseDto getTrashBin(Long trashBinId) {
