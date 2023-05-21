@@ -17,10 +17,10 @@ public class Address {
     private String roadName; //도로명
     private String detailAddress; //상세주소
     private String installPoint; //설치지점
-    @Column(name = "COORDINATE_X")
-    private double coordinateX; //X좌표
-    @Column(name = "COORDINATE_Y")
-    private double coordinateY; //Y좌표
+
+    private double latitude; //위도
+
+    private double longitude; //경도
 
     //==생성 메서드==//
     public static Address createAddress(ReportDto.PostDto postDto) {
@@ -29,8 +29,8 @@ public class Address {
                 .roadName(postDto.getRoadName())
                 .detailAddress(postDto.getDetailAddress())
                 .installPoint(postDto.getInstallPoint())
-                .coordinateX(postDto.getCoordinateX())
-                .coordinateY(postDto.getCoordinateY())
+                .latitude(postDto.getLatitude())
+                .longitude(postDto.getLongitude())
                 .build();
     }
 }

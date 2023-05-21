@@ -19,8 +19,8 @@ public class TrashBinDto {
         private String roadName; //도로명
         private String detailAddress; //상세주소
         private String installPoint; //설치지점
-        private double coordinateX; //X좌표
-        private double coordinateY; //Y좌표
+        private double latitude; //위도
+        private double longitude; //경도
     }
 
     @Getter
@@ -71,4 +71,5 @@ public class TrashBinDto {
         private TrashCategory trashCategory;
         private Address address;
     }
+
 }

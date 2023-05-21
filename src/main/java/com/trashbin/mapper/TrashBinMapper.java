@@ -21,8 +21,8 @@ public interface TrashBinMapper {
                     .roadName(postDto.getRoadName())
                     .detailAddress(postDto.getDetailAddress())
                     .installPoint(postDto.getInstallPoint())
-                    .coordinateX(postDto.getCoordinateX())
-                    .coordinateY(postDto.getCoordinateY())
+                    .latitude(postDto.getLatitude())
+                    .longitude(postDto.getLongitude())
                     .build();
 
             TrashCategory trashCategory;
@@ -40,7 +40,7 @@ public interface TrashBinMapper {
     }
 
     default List<TrashBinDto.ResponseDto>
-    TrashBinEntitiesToTrashBinResponseDtos(List<TrashBinEntity> trashBinEntities) {
+    TrashBinEntitiesToAllTrashBinResponseDtos(List<TrashBinEntity> trashBinEntities) {
         if (trashBinEntities.isEmpty()) {
             return null;
         } else {
