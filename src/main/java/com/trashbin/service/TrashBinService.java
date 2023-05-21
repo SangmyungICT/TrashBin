@@ -1,6 +1,6 @@
 package com.trashbin.service;
 
-import com.trashbin.config.GetNearPin;
+import com.trashbin.GetNearPin;
 import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.dto.ClientDto;
 import com.trashbin.dto.TrashBinDto;

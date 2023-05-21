@@ -1,4 +1,4 @@
-package com.trashbin.config;
+package com.trashbin;
 
 import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.dto.ClientDto;
@@ -17,6 +17,7 @@ public class GetNearPin {
     private static final int EARTH_RADIUS = 6371;
 
     private final TrashBinRepository trashBinRepository;
+
 
     public List<TrashBinEntity> nearTrashBinList(ClientDto.GPSDistanceDto gpsDistanceDto) {
         //현재 위도 좌표 (y 좌표)
