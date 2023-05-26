@@ -15,7 +15,7 @@ public class ReportController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createReport(@RequestBody ReportDto.PostDto postDto) {
-        return ResponseEntity.ok().body(reportService.createReportAndSaveTrashBin(postDto).getTrashBinResponseDto());
+        return ResponseEntity.ok().body(reportService.createReportAndSaveTrashBin(postDto));
     }
 
     @GetMapping("/get")
