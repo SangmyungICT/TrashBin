@@ -31,8 +31,8 @@ public class ReportEntity {
 
 
     public void patchEntity(ReportDto.PatchDto patchDto) {
-        this.trashBinEntity.setTrashCategory(patchDto.getTrashBinPostObjectDto().getTrashCategory());
-        this.trashBinEntity.setAddress(patchDto.getTrashBinPostObjectDto().getAddress());
+        this.trashBinEntity.setTrashCategory(patchDto.getAfterTrashBinPatch().getTrashCategory());
+        this.trashBinEntity.setAddress(patchDto.getAfterTrashBinPatch().getAddress());
         this.nullCount = patchDto.getNullCount();
     }
 }

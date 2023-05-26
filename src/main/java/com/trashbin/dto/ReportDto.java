@@ -1,6 +1,5 @@
 package com.trashbin.dto;
 
-import io.swagger.annotations.ApiParam;
 import lombok.*;
 
 public class ReportDto {
@@ -38,7 +37,7 @@ public class ReportDto {
 //        @ApiParam(value = "report ID")
         private Long reportId;
 //        @ApiParam(value = "쓰레기통 정보")
-        private TrashBinDto.ResponseDto trashBinResponseDto;
+        private TrashBinDto.ResponseDto trashBinInfo;
 //        @ApiParam(value = "쓰레기통이 없다고 보고된 횟수")
         private int nullCount;
     }
@@ -63,7 +62,7 @@ public class ReportDto {
 //        @ApiParam(value = "report ID")
         private Long reportId;
 //        @ApiParam(value = "수정할 데이터")
-        private TrashBinDto.PostObjectDto trashBinPostObjectDto;
+        private TrashBinDto.PostObjectDto afterTrashBinPatch;
 //        @ApiParam(value = "쓰레기통이 없다고 보고된 횟수")
         private int nullCount;
     }

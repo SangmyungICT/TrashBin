@@ -38,7 +38,7 @@ public class ReportService {
 
     @Transactional
     public ReportDto.ResponseDto updateReport(ReportDto.PatchDto patchDto) {
-        TrashBinEntity trashBinEntity = trashBinRepository.findById(patchDto.getTrashBinPostObjectDto().getTrashBinId()).orElseThrow();
+        TrashBinEntity trashBinEntity = trashBinRepository.findById(patchDto.getAfterTrashBinPatch().getTrashBinId()).orElseThrow();
         trashBinEntity.patchEntity(patchDto);
         ReportEntity reportEntity = reportRepository.findById(patchDto.getReportId()).orElseThrow();
         reportEntity.patchEntity(patchDto);

@@ -30,8 +30,8 @@ public class TrashBinEntity {
     }
 
     public void patchEntity(ReportDto.PatchDto patchDto) {
-        this.address = patchDto.getTrashBinPostObjectDto().getAddress();
-        this.trashCategory = patchDto.getTrashBinPostObjectDto().getTrashCategory();
+        this.address = patchDto.getAfterTrashBinPatch().getAddress();
+        this.trashCategory = patchDto.getAfterTrashBinPatch().getTrashCategory();
     }
 
     //==생성 메서드==//

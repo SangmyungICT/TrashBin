@@ -35,7 +35,7 @@ public interface ReportMapper {
                     .build();
             return ReportDto.ResponseDto.builder()
                     .reportId(reportEntity.getId())
-                    .trashBinResponseDto(trashBinResponseDto)
+                    .trashBinInfo(trashBinResponseDto)
                     .nullCount(reportEntity.getNullCount())
                     .build();
         }
