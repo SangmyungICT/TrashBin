@@ -1,7 +1,6 @@
 package com.trashbin.service;
 
 import com.trashbin.domain.ReportEntity;
-import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.dto.ReportDto;
 import com.trashbin.mapper.ReportMapper;
 import com.trashbin.repository.ReportRepository;
@@ -21,30 +20,30 @@ public class ReportService {
     private final ReportMapper reportMapper;
 
     @Transactional
-    public ReportDto.ResponseDto createReportAndSaveTrashBin(ReportDto.PostDto postDto) {
-        ReportEntity reportEntity = reportMapper.reportRequestPostDtoToReportEntity(postDto);
+    public ReportDto.ReportResponseDto createReportAndSaveTrashBin(ReportDto.ReportPostDto reportPostDto) {
+        ReportEntity reportEntity = reportMapper.reportRequestPostDtoToReportEntity(reportPostDto);
         reportRepository.save(reportEntity);
 
         log.info("Entity Id: {} is saved", reportEntity.getId());
         return reportMapper.reportEntityToReportResponseDto(reportRepository.findById(reportEntity.getId()).orElseThrow());
     }
 
-    public ReportDto.ResponseDto getReport(Long reportId) {
+    public ReportDto.ReportResponseDto getReport(Long reportId) {
         return reportMapper.reportEntityToReportResponseDto(reportRepository.findById(reportId).orElseThrow());
     }
 
     @Transactional
-    public ReportDto.ResponseDto updateReport(ReportDto.PatchDto patchDto) {
-        ReportEntity reportEntity = reportRepository.findById(patchDto.getReportId()).orElseThrow();
-        reportEntity.patchEntity(patchDto);
+    public ReportDto.ReportResponseDto updateReport(ReportDto.ReportPatchDto reportPatchDto) {
+        ReportEntity reportEntity = reportRepository.findById(reportPatchDto.getReportId()).orElseThrow();
+        reportEntity.patchEntity(reportPatchDto);
 
         log.info("Entity Id: {} is patched", reportEntity.getId());
-        return reportMapper.reportEntityToReportResponseDto(reportRepository.findById(patchDto.getReportId()).orElseThrow());
+        return reportMapper.reportEntityToReportResponseDto(reportRepository.findById(reportPatchDto.getReportId()).orElseThrow());
     }
 
     @Transactional
-    public void deleteReport(ReportDto.DeleteDto deleteDto) {
-        reportRepository.deleteById(deleteDto.getReportId());
-        log.info("Entity Id: {} is deleted", deleteDto.getReportId());
+    public void deleteReport(ReportDto.ReportDeleteDto reportDeleteDto) {
+        reportRepository.deleteById(reportDeleteDto.getReportId());
+        log.info("Entity Id: {} is deleted", reportDeleteDto.getReportId());
     }
 }

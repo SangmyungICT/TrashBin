@@ -1,10 +1,8 @@
 package com.trashbin.domain;
 
 import com.trashbin.dto.ReportDto;
-import com.trashbin.dto.TrashBinDto;
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -25,23 +23,23 @@ public class Address {
     private double longitude; //경도
 
     //==생성 메서드==//
-    public static Address createAddress(ReportDto.PostDto postDto) {
+    public static Address createAddress(ReportDto.ReportPostDto reportPostDto) {
         return Address.builder()
-                .gu(postDto.getRegion_2depth_name())
-                .roadName(postDto.getRoad_name())
-                .detailAddress(postDto.getRoad_name()+postDto.getMain_building_no())
-                .installPoint(postDto.getBuilding_name())
-                .latitude(postDto.getLatitude())
-                .longitude(postDto.getLongitude())
+                .gu(reportPostDto.getRegion_2depth_name())
+                .roadName(reportPostDto.getRoad_name())
+                .detailAddress(reportPostDto.getRoad_name()+ reportPostDto.getMain_building_no())
+                .installPoint(reportPostDto.getBuilding_name())
+                .latitude(reportPostDto.getLatitude())
+                .longitude(reportPostDto.getLongitude())
                 .build();
     }
 
-    public void patchAddress(ReportDto.PatchDto patchDto) {
-            this.gu = patchDto.getRegion_2depth_name();
-            this.roadName = patchDto.getRoad_name();
-            this.detailAddress = patchDto.getRoad_name() + patchDto.getMain_building_no();
-            this.installPoint = patchDto.getBuilding_name();
-            this.latitude = patchDto.getLatitude();
-            this.longitude = patchDto.getLongitude();
+    public void patchAddress(ReportDto.ReportPatchDto reportPatchDto) {
+            this.gu = reportPatchDto.getRegion_2depth_name();
+            this.roadName = reportPatchDto.getRoad_name();
+            this.detailAddress = reportPatchDto.getRoad_name() + reportPatchDto.getMain_building_no();
+            this.installPoint = reportPatchDto.getBuilding_name();
+            this.latitude = reportPatchDto.getLatitude();
+            this.longitude = reportPatchDto.getLongitude();
     }
 }

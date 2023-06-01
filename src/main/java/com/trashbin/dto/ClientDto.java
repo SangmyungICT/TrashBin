@@ -1,9 +1,7 @@
 package com.trashbin.dto;
 
-import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.*;
-import org.springframework.context.annotation.Bean;
 
 public class ClientDto {
     @Getter
@@ -12,7 +10,7 @@ public class ClientDto {
     @NoArgsConstructor
     @Builder
 ////    @ApiOperation(value = "사용자 GPS정보")
-    public static class GPSDto {
+    public static class ClientGPSDto {
 //        @ApiParam(value = "위도")
         private double latitude; //위도
 //        @ApiParam(value = "경도")
@@ -25,7 +23,7 @@ public class ClientDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class GPSDistanceDto {
+    public static class ClientGPSDistanceDto {
         @ApiParam(value = "위도")
         private double latitude; //위도
         @ApiParam(value = "경도")

@@ -30,8 +30,8 @@ public class ReportEntity {
     private LocalDateTime reportTime; //todo: 자동으로 기록되도록 해야함
 
 
-    public void patchEntity(ReportDto.PatchDto patchDto) {
-        this.trashBinEntity.patchEntity(patchDto);
-        this.nullCount = patchDto.getNullCount();
+    public void patchEntity(ReportDto.ReportPatchDto reportPatchDto) {
+        this.trashBinEntity.patchEntity(reportPatchDto);
+        this.nullCount = reportPatchDto.getNullCount();
     }
 }

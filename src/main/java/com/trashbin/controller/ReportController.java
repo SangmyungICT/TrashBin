@@ -14,8 +14,8 @@ public class ReportController {
     private final ReportService reportService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createReport(@RequestBody ReportDto.PostDto postDto) {
-        return ResponseEntity.ok().body(reportService.createReportAndSaveTrashBin(postDto));
+    public ResponseEntity<?> createReport(@RequestBody ReportDto.ReportPostDto reportPostDto) {
+        return ResponseEntity.ok().body(reportService.createReportAndSaveTrashBin(reportPostDto));
     }
 
     @GetMapping("/get")
@@ -24,13 +24,13 @@ public class ReportController {
     }
 
     @PatchMapping("/modify")
-    public ResponseEntity<?> modifyReport(@RequestBody ReportDto.PatchDto patchDto) {
-        return ResponseEntity.ok().body(reportService.updateReport(patchDto));
+    public ResponseEntity<?> modifyReport(@RequestBody ReportDto.ReportPatchDto reportPatchDto) {
+        return ResponseEntity.ok().body(reportService.updateReport(reportPatchDto));
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteReport(@RequestParam Long reportId) {
-        reportService.deleteReport(new ReportDto.DeleteDto(reportId));
+        reportService.deleteReport(new ReportDto.ReportDeleteDto(reportId));
         return ResponseEntity.ok().body("deleted reportId:" + reportId);
     }
 }

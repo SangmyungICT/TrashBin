@@ -8,8 +8,7 @@ public class ReportDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    @ToString
-    public static class PostDto {
+    public static class ReportPostDto {
         private String trashCategory;
         private String address_name;
         private String building_name;
@@ -29,9 +28,9 @@ public class ReportDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class ResponseDto {
+    public static class ReportResponseDto {
         private Long reportId;
-        private TrashBinDto.ResponseDto trashBinInfo;
+        private TrashBinDto.TrashBinResponseDto trashBinInfo;
         private int nullCount;
     }
 
@@ -40,7 +39,7 @@ public class ReportDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class DeleteDto {
+    public static class ReportDeleteDto {
         private Long reportId;
     }
 
@@ -50,7 +49,7 @@ public class ReportDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class PatchDto {
+    public static class ReportPatchDto {
         private Long reportId;
 
         private String trashCategory;

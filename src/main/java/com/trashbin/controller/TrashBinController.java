@@ -16,8 +16,8 @@ public class TrashBinController {
     private final TrashBinService trashBinService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createTrashBin(@RequestBody TrashBinDto.PostDto postDto) {
-        return ResponseEntity.ok().body(trashBinService.createTrashBin(postDto));
+    public ResponseEntity<?> createTrashBin(@RequestBody TrashBinDto.TrashBinPostDto trashBinPostDto) {
+        return ResponseEntity.ok().body(trashBinService.createTrashBin(trashBinPostDto));
     }
 
     @GetMapping("/getallbins")
@@ -27,8 +27,8 @@ public class TrashBinController {
 
 
     @GetMapping("/getnearbins")
-    public ResponseEntity<?> getNearBins(@ModelAttribute("gpsdistance") ClientDto.GPSDistanceDto gpsDistanceDto) {
-        return ResponseEntity.ok().body(trashBinService.getNearTrashBin(gpsDistanceDto));
+    public ResponseEntity<?> getNearBins(@ModelAttribute("gpsdistance") ClientDto.ClientGPSDistanceDto clientGpsDistanceDto) {
+        return ResponseEntity.ok().body(trashBinService.getNearTrashBin(clientGpsDistanceDto));
     }
 
     @GetMapping("/getbin")
@@ -37,13 +37,13 @@ public class TrashBinController {
     }
 
     @PatchMapping("/modify")
-    public ResponseEntity<?> modifyTrashBin(@RequestBody TrashBinDto.PatchDto patchDto) {
-        return ResponseEntity.ok().body(trashBinService.updateTrashBin(patchDto));
+    public ResponseEntity<?> modifyTrashBin(@RequestBody TrashBinDto.TrashBinPatchDto trashBinPatchDto) {
+        return ResponseEntity.ok().body(trashBinService.updateTrashBin(trashBinPatchDto));
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteTrashBin(@RequestParam Long trashBinId) {
-        trashBinService.deleteTrashBin(new TrashBinDto.DeleteDto(trashBinId));
+        trashBinService.deleteTrashBin(new TrashBinDto.TrashBinDeleteDto(trashBinId));
         return ResponseEntity.ok().body("deleted trashBinId:" + trashBinId);
     }
 }

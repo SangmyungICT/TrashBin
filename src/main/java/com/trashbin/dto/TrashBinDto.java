@@ -3,7 +3,6 @@ package com.trashbin.dto;
 import com.trashbin.domain.Address;
 import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.domain.TrashCategory;
-import io.swagger.annotations.ApiParam;
 import lombok.*;
 
 
@@ -14,7 +13,7 @@ public class TrashBinDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class PostDto {
+    public static class TrashBinPostDto {
         private String trashCategory;
         private String gu; //자치구명
         private String roadName; //도로명
@@ -29,13 +28,13 @@ public class TrashBinDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class ResponseDto {
+    public static class TrashBinResponseDto {
         private Long trashBinId;
         private TrashCategory trashCategory;
         private Address address;
 
 
-        public ResponseDto(TrashBinEntity trashBinEntity) {
+        public TrashBinResponseDto(TrashBinEntity trashBinEntity) {
             this.trashBinId = trashBinEntity.getId();
             this.trashCategory = trashBinEntity.getTrashCategory();
             this.address = trashBinEntity.getAddress();
@@ -47,7 +46,7 @@ public class TrashBinDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class DeleteDto {
+    public static class TrashBinDeleteDto {
         private Long trashBinId;
     }
 
@@ -57,7 +56,7 @@ public class TrashBinDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class PatchDto {
+    public static class TrashBinPatchDto {
         private Long trashBinId;
         private TrashCategory trashCategory;
         private Address address;

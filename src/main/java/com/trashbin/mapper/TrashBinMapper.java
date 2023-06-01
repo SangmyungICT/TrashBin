@@ -12,22 +12,22 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public interface TrashBinMapper {
 
-    default TrashBinEntity trashBinRequestPostDtoToTrashBinEntity(TrashBinDto.PostDto postDto) {
-        if (postDto == null) {
+    default TrashBinEntity trashBinRequestPostDtoToTrashBinEntity(TrashBinDto.TrashBinPostDto trashBinPostDto) {
+        if (trashBinPostDto == null) {
             return null;
         } else {
             Address address = Address.builder()
-                    .gu(postDto.getGu())
-                    .roadName(postDto.getRoadName())
-                    .detailAddress(postDto.getDetailAddress())
-                    .installPoint(postDto.getInstallPoint())
-                    .latitude(postDto.getLatitude())
-                    .longitude(postDto.getLongitude())
+                    .gu(trashBinPostDto.getGu())
+                    .roadName(trashBinPostDto.getRoadName())
+                    .detailAddress(trashBinPostDto.getDetailAddress())
+                    .installPoint(trashBinPostDto.getInstallPoint())
+                    .latitude(trashBinPostDto.getLatitude())
+                    .longitude(trashBinPostDto.getLongitude())
                     .build();
 
             TrashCategory trashCategory;
-            if (postDto.getTrashCategory().equals("CIGARETTE")) trashCategory = TrashCategory.CIGARETTE;
-            else if (postDto.getTrashCategory().equals("RECYCLE")) trashCategory = TrashCategory.RECYCLE;
+            if (trashBinPostDto.getTrashCategory().equals("CIGARETTE")) trashCategory = TrashCategory.CIGARETTE;
+            else if (trashBinPostDto.getTrashCategory().equals("RECYCLE")) trashCategory = TrashCategory.RECYCLE;
             else trashCategory = TrashCategory.GENERAL;
 
             return TrashBinEntity.builder()
@@ -39,21 +39,21 @@ public interface TrashBinMapper {
         }
     }
 
-    default List<TrashBinDto.ResponseDto>
+    default List<TrashBinDto.TrashBinResponseDto>
     TrashBinEntitiesToTrashBinResponseDtos(List<TrashBinEntity> trashBinEntities) {
         if (trashBinEntities.isEmpty()) {
             return null;
         } else {
             return trashBinEntities.stream()
-                    .map(TrashBinDto.ResponseDto::new).collect(Collectors.toList());
+                    .map(TrashBinDto.TrashBinResponseDto::new).collect(Collectors.toList());
         }
     }
 
-    default TrashBinDto.ResponseDto TrashBinEntityToTrashBinResponseDto(TrashBinEntity trashBinEntity) {
+    default TrashBinDto.TrashBinResponseDto TrashBinEntityToTrashBinResponseDto(TrashBinEntity trashBinEntity) {
         if (trashBinEntity == null) {
             return null;
         } else {
-            return TrashBinDto.ResponseDto.builder()
+            return TrashBinDto.TrashBinResponseDto.builder()
                     .trashBinId(trashBinEntity.getId())
                     .trashCategory(trashBinEntity.getTrashCategory())
                     .address(trashBinEntity.getAddress())

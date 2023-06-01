@@ -24,16 +24,16 @@ public class TrashBinEntity {
     @Embedded
     private Address address;
 
-    public void patchEntity(TrashBinDto.PatchDto patchDto) {
-        this.address = patchDto.getAddress();
-        this.trashCategory = patchDto.getTrashCategory();
+    public void patchEntity(TrashBinDto.TrashBinPatchDto trashBinPatchDto) {
+        this.address = trashBinPatchDto.getAddress();
+        this.trashCategory = trashBinPatchDto.getTrashCategory();
     }
 
-    public void patchEntity(ReportDto.PatchDto patchDto) {
-        if (!patchDto.getAddress_name().equals("")) {
-            this.address.patchAddress(patchDto);
+    public void patchEntity(ReportDto.ReportPatchDto reportPatchDto) {
+        if (!reportPatchDto.getAddress_name().equals("")) {
+            this.address.patchAddress(reportPatchDto);
         }
-        this.trashCategory = stringToTrashCategory(patchDto.getTrashCategory());
+        this.trashCategory = stringToTrashCategory(reportPatchDto.getTrashCategory());
     }
 
     public TrashCategory stringToTrashCategory(String stringCategory) {
@@ -43,16 +43,16 @@ public class TrashBinEntity {
     }
 
     //==생성 메서드==//
-    public static TrashBinEntity createTrashBinEntity(ReportDto.PostDto postDto) {
+    public static TrashBinEntity createTrashBinEntity(ReportDto.ReportPostDto reportPostDto) {
         TrashCategory trashCategory;
-        if (postDto.getTrashCategory() != null) {
-            if (postDto.getTrashCategory().equals("CIGARETTE")) trashCategory = TrashCategory.CIGARETTE;
-            else if (postDto.getTrashCategory().equals("RECYCLE")) trashCategory = TrashCategory.RECYCLE;
+        if (reportPostDto.getTrashCategory() != null) {
+            if (reportPostDto.getTrashCategory().equals("CIGARETTE")) trashCategory = TrashCategory.CIGARETTE;
+            else if (reportPostDto.getTrashCategory().equals("RECYCLE")) trashCategory = TrashCategory.RECYCLE;
             else trashCategory = TrashCategory.GENERAL;
         } else trashCategory = TrashCategory.GENERAL;
 
 
-        Address address = Address.createAddress(postDto);
+        Address address = Address.createAddress(reportPostDto);
 
         return TrashBinEntity.builder()
                 .trashCategory(trashCategory)
