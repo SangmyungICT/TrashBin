@@ -27,12 +27,11 @@ public class ReportEntity {
     private TrashBinEntity trashBinEntity;
 
     private int nullCount; //3회가 넘어가면 허위신고로 간주
-    private LocalDateTime reportTime;
+    private LocalDateTime reportTime; //todo: 자동으로 기록되도록 해야함
 
 
     public void patchEntity(ReportDto.PatchDto patchDto) {
-        this.trashBinEntity.setTrashCategory(patchDto.getAfterTrashBinPatch().getTrashCategory());
-        this.trashBinEntity.setAddress(patchDto.getAfterTrashBinPatch().getAddress());
+        this.trashBinEntity.patchEntity(patchDto);
         this.nullCount = patchDto.getNullCount();
     }
 }

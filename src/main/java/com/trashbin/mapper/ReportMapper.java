@@ -1,5 +1,6 @@
 package com.trashbin.mapper;
 
+import com.trashbin.domain.Address;
 import com.trashbin.domain.ReportEntity;
 import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.dto.ReportDto;
@@ -11,14 +12,13 @@ import org.mapstruct.Mapper;
 
 public interface ReportMapper {
 
-    default ReportEntity reportRequestPostDtoToReportEntity(ReportDto.PostDto postDto, TrashBinEntity trashBinEntity) {
+    default ReportEntity reportRequestPostDtoToReportEntity(ReportDto.PostDto postDto) {
 
         if (postDto == null) {
             return null;
         } else {
-
             return ReportEntity.builder()
-                    .trashBinEntity(trashBinEntity)
+                    .trashBinEntity(TrashBinEntity.createTrashBinEntity(postDto))
                     .nullCount(postDto.getNullCount())
                     .build();
         }

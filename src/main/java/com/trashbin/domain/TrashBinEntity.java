@@ -30,16 +30,27 @@ public class TrashBinEntity {
     }
 
     public void patchEntity(ReportDto.PatchDto patchDto) {
-        this.address = patchDto.getAfterTrashBinPatch().getAddress();
-        this.trashCategory = patchDto.getAfterTrashBinPatch().getTrashCategory();
+        if (!patchDto.getAddress_name().equals("")) {
+            this.address.patchAddress(patchDto);
+        }
+        this.trashCategory = stringToTrashCategory(patchDto.getTrashCategory());
+    }
+
+    public TrashCategory stringToTrashCategory(String stringCategory) {
+        if (stringCategory.equals("CIGARETTE")) return TrashCategory.CIGARETTE;
+        else if (stringCategory.equals("RECYCLE")) return TrashCategory.RECYCLE;
+        else return TrashCategory.GENERAL;
     }
 
     //==생성 메서드==//
     public static TrashBinEntity createTrashBinEntity(ReportDto.PostDto postDto) {
         TrashCategory trashCategory;
-        if (postDto.getTrashCategory().equals("CIGARETTE")) trashCategory = TrashCategory.CIGARETTE;
-        else if (postDto.getTrashCategory().equals("RECYCLE")) trashCategory = TrashCategory.RECYCLE;
-        else trashCategory = TrashCategory.GENERAL;
+        if (postDto.getTrashCategory() != null) {
+            if (postDto.getTrashCategory().equals("CIGARETTE")) trashCategory = TrashCategory.CIGARETTE;
+            else if (postDto.getTrashCategory().equals("RECYCLE")) trashCategory = TrashCategory.RECYCLE;
+            else trashCategory = TrashCategory.GENERAL;
+        } else trashCategory = TrashCategory.GENERAL;
+
 
         Address address = Address.createAddress(postDto);
 
