@@ -21,7 +21,7 @@ public class TrashBinApplication {
     @Bean
     RouterFunction<ServerResponse> routerFunction() {
         return route(GET("/docs"), req ->
-                ServerResponse.temporaryRedirect(URI.create("swagger-ui/index.html")).build());
+                ServerResponse.temporaryRedirect(URI.create("swagger-ui.html")).build());
     }
 
 }
