@@ -5,12 +5,14 @@ import com.trashbin.domain.TrashBinEntity;
 import com.trashbin.dto.ClientDto;
 import com.trashbin.dto.TrashBinDto;
 import com.trashbin.mapper.TrashBinMapper;
+import com.trashbin.repository.ReportRepository;
 import com.trashbin.repository.TrashBinRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -19,6 +21,7 @@ import java.util.List;
 public class TrashBinService {
 
     private final TrashBinRepository trashBinRepository;
+    private final ReportRepository reportRepository;
     private final TrashBinMapper trashBinMapper;
     private final GetNearPin getNearPin;
 
@@ -59,7 +62,17 @@ public class TrashBinService {
      */
     @Transactional
     public void deleteTrashBin(TrashBinDto.TrashBinDeleteDto trashBinDeleteDto) {
-        trashBinRepository.deleteById(trashBinDeleteDto.getTrashBinId());
-        log.info("Entity Id: {} is deleted", trashBinDeleteDto.getTrashBinId());
+        try {
+            TrashBinEntity trashBinEntity = trashBinRepository.findById(trashBinDeleteDto.getTrashBinId()).orElseThrow(EntityNotFoundException::new);
+            Long reportId = trashBinEntity.getReportEntity().getId();
+            reportRepository.deleteById(reportId);
+            log.info("Report Id: {} Entity Id: {} is deleted", reportId,trashBinDeleteDto.getTrashBinId());
+        } catch (Exception e) {
+            trashBinRepository.deleteById(trashBinDeleteDto.getTrashBinId());
+            log.info("Entity Id: {} is deleted", trashBinDeleteDto.getTrashBinId());
+        }
+
+
+
     }
 }

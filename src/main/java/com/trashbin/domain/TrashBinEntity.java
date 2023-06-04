@@ -24,6 +24,9 @@ public class TrashBinEntity {
     @Embedded
     private Address address;
 
+    @OneToOne(mappedBy = "trashBinEntity")
+    private ReportEntity reportEntity;
+
     public void patchEntity(TrashBinDto.TrashBinPatchDto trashBinPatchDto) {
         this.address = trashBinPatchDto.getAddress();
         this.trashCategory = trashBinPatchDto.getTrashCategory();
